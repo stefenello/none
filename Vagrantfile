@@ -16,6 +16,9 @@ Vagrant.configure("2") do |config|
   config.vm.define "tower" do |tower|
     config.vm.hostname = "tower.local"
     config.vm.box = "generic/rhel8"
+    config.vm.network "private_network", ip: "10.42.0.42"
+    config.vm.network "forwarded_port", guest: 80, host: 8080, host_ip: "10.42.0.42"
+    config.vm.network "forwarded_port", guest: 22, host: 2200, host_ip: "10.42.0.42"
     tower.vm.provider :virtualbox do |v|
        v.gui = false
        v.memory = 4096
