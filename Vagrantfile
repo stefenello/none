@@ -16,7 +16,6 @@ Vagrant.configure("2") do |config|
   config.vm.define "tower" do |tower|
     config.vm.hostname = "tower.local"
     config.vm.box = "generic/rhel8"
-    config.disksize.size = '20GB'
     tower.vm.provider :virtualbox do |v|
        v.gui = false
        v.memory = 4096
