@@ -17,8 +17,9 @@ Vagrant.configure("2") do |config|
     config.vm.hostname = "tower.local"
     config.vm.box = "generic/rhel8"
     config.vm.network "private_network", ip: "172.28.120.5"
-    config.vm.provision "shell", inline: "sed -i 's/#PubkeyAuthentication no/PubkeyAuthentication no/g' /etc/ssh/sshd_config ; systemctl restart sshd.service"
-    config.vm.provision "shell", inline: "sed -i 's/#ChallengeResponseAuthentication yes/ChallengeResponseAuthentication yes/g' /etc/ssh/sshd_config ; systemctl restart sshd.service"
+    config.vm.provision "shell", inline: "sed -i 's/#PubkeyAuthentication yes/PubkeyAuthentication no/g' /etc/ssh/sshd_config"
+    config.vm.provision "shell", inline: "sed -i 's/ChallengeResponseAuthentication no/ChallengeResponseAuthentication yes/g' /etc/ssh/sshd_config"
+    config.vm.provision "shell", inline: "systemctl restart sshd.service"
     tower.vm.provider :virtualbox do |v|
        v.gui = false
        v.memory = 8192
