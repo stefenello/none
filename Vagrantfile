@@ -16,12 +16,12 @@ Vagrant.configure("2") do |config|
   config.vm.define "tower" do |tower|
     config.vm.hostname = "tower.local"
     config.vm.box = "generic/rhel8"
-    config.vm.network "private_network", ip: "10.42.0.42"
-    config.vm.network "forwarded_port", guest: 80, host: 8080, host_ip: "10.42.0.42"
-    config.vm.network "forwarded_port", guest: 22, host: 2200, host_ip: "10.42.0.42"
+    config.vm.network "private_network", ip: "172.28.120.5"
+    config.vm.provision "shell", inline: "sed -i 's/#PubkeyAuthentication no/PubkeyAuthentication no/g' /etc/ssh/sshd_config ; systemctl restart sshd.service"
+    config.vm.provision "shell", inline: "sed -i 's/#ChallengeResponseAuthentication yes/ChallengeResponseAuthentication yes/g' /etc/ssh/sshd_config ; systemctl restart sshd.service"
     tower.vm.provider :virtualbox do |v|
        v.gui = false
-       v.memory = 4096
+       v.memory = 8192
        v.cpus = 2
     end
 end
