@@ -20,6 +20,7 @@ Vagrant.configure("2") do |config|
     config.vm.provision "shell", inline: "sed -i 's/#PubkeyAuthentication yes/PubkeyAuthentication no/g' /etc/ssh/sshd_config"
     config.vm.provision "shell", inline: "sed -i 's/ChallengeResponseAuthentication no/ChallengeResponseAuthentication yes/g' /etc/ssh/sshd_config"
     config.vm.provision "shell", inline: "systemctl restart sshd.service"
+    config.vm.provision "shell", inline: "echo -e 'R3dha7$123\nR3dha7$123' | sudo passwd root"
     tower.vm.provider :virtualbox do |v|
        v.gui = false
        v.memory = 8192
